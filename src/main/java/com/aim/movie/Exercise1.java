@@ -38,8 +38,7 @@ public class Exercise1 {
             System.out.format("%-30.30s ", movie.getGenre());
             System.out.format("%-30.30s %n", movie.getRating());
         }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Connection failure.");
         } finally {
@@ -67,8 +66,8 @@ public class Exercise1 {
                 sql.append("join ratings r on r.rating_id = m.rating_id ");
                 sql.append("where m.movie_name = '" + movieTitle + "';");
 
-                ResultSet = resultSet = statement.executeQuery(sql.toString());
-                return ResultSet;
+                ResultSet resultSet = statement.executeQuery(sql.toString());
+                return resultSet;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,6 +84,8 @@ public class Exercise1 {
 
                 if (resultSet.next()) {
                     movie = new Movie();
+                    
+                    do {
 
                     movie.setMovieTitle(resultSet.getString("m.movie_name"));
                     movie.setMovieLength(resultSet.getInt("m.movie_length"));
@@ -107,4 +108,5 @@ public class Exercise1 {
             + sql.toString() + "\n");
         }
         return movie;
+}
 }
