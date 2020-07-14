@@ -64,6 +64,7 @@ public class Exercise1 {
                 sql.append("from movies m ");
                 sql.append("join directors d on d.director_id = m.director_id ");
                 sql.append("join ratings r on r.rating_id = m.rating_id ");
+                sql.append("join genres g on g.genre_id = m.genre_id ");
                 sql.append("where m.movie_name = '" + movieTitle + "';");
 
                 ResultSet resultSet = statement.executeQuery(sql.toString());
@@ -78,16 +79,16 @@ public class Exercise1 {
         }
 
         public static Movie getMovie(ResultSet resultSet) {
-            Movie movie = null;
+            Movie movie = null; // initialize the variable
 
             try {
-
+                // check to see if we have a result
                 if (resultSet.next()) {
-                    movie = new Movie();
+                    movie = new Movie(); // if there is, create the movie object
                     
-                    do {
+                    do { // update the movie object with the columns
 
-                    movie.setMovieTitle(resultSet.getString("m.movie_name"));
+                    movie.setMovieTitle(resultSet.getString("m.movie_name")); // set the movie title to value in result set
                     movie.setMovieLength(resultSet.getInt("m.movie_length"));
                     movie.setReleaseDate(resultSet.getDate("m.release_date"));
                     movie.setGenre(resultSet.getString("g.genre"));
